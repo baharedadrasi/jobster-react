@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/BigSidebar';
 import Logo from './Logo';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import NavLinks from './NavLinks';
+import { toggleSidebar } from '../features/user/userSlice';
 
 const BigSidebar = () => {
   const { isSidebarOpen } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  const toggle = () => {
+    dispatch(toggleSidebar());
+  };
   return (
     <Wrapper>
       <div
@@ -16,14 +23,7 @@ const BigSidebar = () => {
           <header>
             <Logo />
           </header>
-          <div className="nav-links">
-            <Link className="nav-link active" to="/">
-              stats
-            </Link>
-            <Link className="nav-link" to="/all-jobs">
-              all jobs
-            </Link>
-          </div>
+          <NavLinks />
         </div>
       </div>
     </Wrapper>
