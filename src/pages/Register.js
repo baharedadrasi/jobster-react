@@ -42,7 +42,6 @@ const Register = () => {
     }
     if (isMember) {
       dispatch(loginUser({ email, password }));
-
       return;
     }
     dispatch(registerUser({ name, email, password }));
