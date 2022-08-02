@@ -7,6 +7,12 @@ import {
   removeUserFromLocalStorage,
 } from '../../utils/localStorage';
 
+import {
+  registerUserThunk,
+  loginUserThunk,
+  logoutUserThunk,
+} from './userThunk';
+
 const initialState = {
   isLoading: false,
   isSidebarOpen: true,
@@ -19,23 +25,20 @@ const authUrl = '/auth/register';
 export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (user, thunkAPI) => {
-    try {
-      const { data } = await customFetch.post('/auth/register', user);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
-    }
+    return registerUserThunk('/auth/register', user, thunkAPI);
   }
 );
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user, thunkAPI) => {
-    try {
-      const { data } = await customFetch.post('/auth/login', user);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
-    }
+    return loginUserThunk('/auth/login', user, thunkAPI);
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (user, thunkAPI) => {
+    return logoutUserThunk('/auth/updateUser', user, thunkAPI);
   }
 );
 
@@ -43,11 +46,13 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logoutUser: (state) => {
+    logoutUser: (state, { payload }) => {
       state.user = null;
       removeUserFromLocalStorage();
       state.isSidebarOpen = true;
-      toast.success('logging out...');
+      if (payload) {
+        toast.success(payload);
+      }
     },
     toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
@@ -69,7 +74,7 @@ const userSlice = createSlice({
       toast.error(payload);
     },
     [loginUser.pending]: (state) => {
-      state.isLoading = state.isSidebarOpen ? false : true;
+      state.isLoading = true;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
       const { user } = payload;
@@ -79,6 +84,20 @@ const userSlice = createSlice({
       toast.success(`welcome back ${user.name}`);
     },
     [loginUser.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [updateUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateUser.fulfilled]: (state, { payload }) => {
+      const { user } = payload;
+      state.isLoading = false;
+      state.user = user;
+      addUserToLocalStorage(user);
+      toast.success('User Updated!');
+    },
+    [updateUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },
