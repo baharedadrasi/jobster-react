@@ -76,10 +76,21 @@ const Register = () => {
           values={values.password}
           handleChange={handleChange}
         />
-        <button className="btn btn-block" disabled={isLoading}>
+        <button className="btn btn-block" disabled={isLoading} type="submit">
           {isLoading ? 'loading...' : 'submit'}
         </button>
-        <button className="btn btn-block btn-hipster">demo app</button>
+        <button
+          className="btn btn-block btn-hipster"
+          type="button"
+          disabled={isLoading}
+          onClick={() => {
+            dispatch(
+              loginUser({ email: 'testUser@test.com', password: 'secret' })
+            );
+          }}
+        >
+          {isLoading ? 'loading...' : 'demo app'}
+        </button>
 
         <p>
           {values.isMember ? 'Not a member yet?' : 'Already a member?'}
