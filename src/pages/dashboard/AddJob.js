@@ -1,14 +1,13 @@
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
-import FormRow from '../../components/FormRow';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import FormRowSelect from '../../components/FormRowSelect';
 import {
   handleChange,
   clearValues,
   createJob,
   editJob,
 } from '../../features/job/jobSlice';
+import { FormRow, FormRowSelect } from '../../components';
 import { useEffect } from 'react';
 
 const AddJob = () => {
