@@ -3,5 +3,19 @@ import FormRow from './FormRow';
 import SmallSidebar from './SmallSidebar';
 import BigSidebar from './BigSidebar';
 import Navbar from './Navbar';
+import SearchContainer from './SearchContainer';
+import JobsContainer from './JobsContainer';
+import Loading from './Loading';
+import JobInfo from './JobInfo';
 
-export { Logo, FormRow, Navbar, SmallSidebar, BigSidebar };
+export {
+  Logo,
+  FormRow,
+  Navbar,
+  SmallSidebar,
+  BigSidebar,
+  SearchContainer,
+  JobsContainer,
+  Loading,
+  JobInfo,
+};
