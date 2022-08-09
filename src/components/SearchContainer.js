@@ -10,7 +10,7 @@ const SearchContainer = () => {
   const dispatch = useDispatch();
 
   const handleSearch = (e) => {
-    // isLoading check later
+    // if (isLoading) return;
     dispatch(handleChange({ name: e.target.name, value: e.target.value }));
   };
   const handleSubmit = (e) => {
@@ -36,7 +36,7 @@ const SearchContainer = () => {
             name="searchStatus"
             value={searchStatus}
             handleChange={handleSearch}
-            list={[searchStatus, ...statusOptions]}
+            list={['all', ...statusOptions]}
           />
           {/* search by type */}
           <FormRowSelect
@@ -44,7 +44,7 @@ const SearchContainer = () => {
             name="searchType"
             value={searchType}
             handleChange={handleSearch}
-            list={[searchType, ...jobTypeOptions]}
+            list={['all', ...jobTypeOptions]}
           />
           {/* sort */}
           <FormRowSelect

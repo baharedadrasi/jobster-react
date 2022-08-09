@@ -10,6 +10,7 @@ import JobInfo from './JobInfo';
 import StatsContainer from './StatsContainer';
 import ChartsContainer from './ChartsContainer';
 import FormRowSelect from './FormRowSelect';
+import PageBtnContainer from './PageBtnContainer';
 
 export {
   Logo,
@@ -24,4 +25,5 @@ export {
   StatsContainer,
   ChartsContainer,
   FormRowSelect,
+  PageBtnContainer,
 };
