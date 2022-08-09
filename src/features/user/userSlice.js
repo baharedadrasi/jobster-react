@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import customFetch from '../../utils/axios';
 import {
   getUserFromLocalStorage,
   addUserToLocalStorage,
@@ -10,8 +9,8 @@ import {
 import {
   registerUserThunk,
   loginUserThunk,
-  logoutUserThunk,
   clearStoreThunk,
+  updateUserThunk,
 } from './userThunk';
 
 const initialState = {
@@ -39,7 +38,7 @@ export const loginUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (user, thunkAPI) => {
-    return logoutUserThunk('/auth/updateUser', user, thunkAPI);
+    return updateUserThunk('/auth/updateUser', user, thunkAPI);
   }
 );
 
